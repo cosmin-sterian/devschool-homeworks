@@ -1,7 +1,7 @@
 package Inheritance;
 
-public class Main {
-    public static void main(String[] args) {
+public class Inheritance {
+    public static void testInheritance() {
         Vehicle vehicle = new Vehicle() {{
             System.out.println(toString());
             incSpeed();

@@ -5,7 +5,7 @@ public class EqualSumChecker {
         return ((a + b) == c);
     }
 
-    public static void main(String[] args) {
+    public static void testEqualSumChecker() {
 
         System.out.println(
                         hasEqualsSum(1, 1, 1) + "\n" +
