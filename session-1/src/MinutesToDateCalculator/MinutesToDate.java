@@ -17,7 +17,7 @@ public class MinutesToDate {
         );
     }
 
-    public static void main(String[] args) {
+    public static void testMinutesToDate() {
 
         printYearsAndDays(525600);
         printYearsAndDays(1051200);
