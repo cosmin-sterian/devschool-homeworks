@@ -37,10 +37,10 @@ public class Hamburger {
     }
 
     protected String name;
-    protected String breadRollType;
-    protected String meat;
-    protected int basePrice;
-    protected HashMap<Addition, Boolean> additions;
+    private String breadRollType;
+    private String meat;
+    private int basePrice;
+    private HashMap<Addition, Boolean> additions;
 
     public Hamburger(String name, String breadRollType, String meat, int basePrice) {
         this.name = name;

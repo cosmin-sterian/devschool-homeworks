@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class HouseRoom {
 
-    ArrayList<Furniture> furniture;
-    ArrayList<Usable> usables;
+    private ArrayList<Furniture> furniture;
+    private ArrayList<Usable> usables;
 
-    String name = "Living Room";
+    private String name = "Living Room";
 
     public HouseRoom() {
         furniture = new ArrayList<>();

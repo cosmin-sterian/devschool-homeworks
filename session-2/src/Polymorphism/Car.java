@@ -2,9 +2,9 @@ package Polymorphism;
 
 public class Car {
 
-    protected boolean engine;
-    protected int wheelsCount;
-    protected int cylindersCount;
+    boolean engine;
+    int wheelsCount;
+    int cylindersCount;
     protected String name;
 
     public Car(int cylindersCount, String name) {
