@@ -3,7 +3,7 @@ package Composition;
 public class Furniture {
 
     protected String name;
-    protected String material;
+    private String material;
 
     public Furniture(String name, String material) {
         this.name = name;

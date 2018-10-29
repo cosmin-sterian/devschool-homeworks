@@ -2,7 +2,7 @@ package Composition;
 
 public interface Usable {
 
-    public enum UsableType { ELECTRONIC, OTHER }
+    enum UsableType { ELECTRONIC, OTHER }
 
     String getName();
     void setName(String name);
