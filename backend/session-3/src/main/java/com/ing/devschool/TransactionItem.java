@@ -38,4 +38,12 @@ public class TransactionItem {
         return count > 0;
     }
 
+    @Override
+    public String toString() {
+        return "TransactionItem{" +
+                "name='" + name + '\'' +
+                ", count=" + count +
+                ", time=" + time +
+                '}';
+    }
 }

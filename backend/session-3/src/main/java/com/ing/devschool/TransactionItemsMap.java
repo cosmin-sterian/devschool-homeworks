@@ -20,7 +20,7 @@ public class TransactionItemsMap {
         if (transactionItemsMap.containsKey(key)) {
             TransactionItem value = transactionItemsMap.get(key);
             value.increaseCount(time);
-            transactionItemsMap.put(key, value);
+            // transactionItemsMap.put(key, value);
         } else {
             transactionItemsMap.put(key, new TransactionItem(key, time));
         }
@@ -30,11 +30,11 @@ public class TransactionItemsMap {
         if (transactionItemsMap.containsKey(key)) {
             TransactionItem value = transactionItemsMap.get(key);
             value.decreaseCount(time);
-            transactionItemsMap.put(key, value);
+            // transactionItemsMap.put(key, value);
         }
     }
 
-    public TransactionItem get(String key) {
+    TransactionItem get(String key) {
         return transactionItemsMap.get(key);
     }
 
@@ -46,4 +46,14 @@ public class TransactionItemsMap {
         return transactionItemsMap.size();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        for (Map.Entry<String, TransactionItem> entry : transactionItemsMap.entrySet()) {
+            result.append("Name: ").append(entry.getKey()).append(", item: ").append(entry.getValue());
+        }
+
+        return result.toString();
+    }
 }
