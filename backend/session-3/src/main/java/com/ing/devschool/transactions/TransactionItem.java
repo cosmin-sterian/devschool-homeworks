@@ -1,8 +1,8 @@
-package com.ing.devschool;
+package com.ing.devschool.transactions;
 
 import java.util.Date;
 
-public class TransactionItem {
+public class TransactionItem implements Comparable<TransactionItem> {
     /*
      * What should I do with the time variable?
      * I can't just abandon it, it looks odd,
@@ -22,6 +22,14 @@ public class TransactionItem {
         this.time = time;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
     void increaseCount(Date time) {
         this.count ++;
         this.time = time;
@@ -39,6 +47,11 @@ public class TransactionItem {
     }
 
     @Override
+    public int compareTo(TransactionItem transactionItem) {
+        return this.time.compareTo(transactionItem.time);
+    }
+
+    @Override
     public String toString() {
         return "TransactionItem{" +
                 "name='" + name + '\'' +
@@ -46,4 +59,5 @@ public class TransactionItem {
                 ", time=" + time +
                 '}';
     }
+
 }

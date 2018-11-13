@@ -1,6 +1,12 @@
 package com.ing.devschool;
 
-import java.util.Map;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ing.devschool.transactions.Transaction;
+import com.ing.devschool.utils.MyCSVParser;
+
+import java.util.List;
 
 public class HomeWork {
 
@@ -10,9 +16,11 @@ public class HomeWork {
         ; // todo:
 
         try {
-            Map<Integer, Transaction> transactionMap = MyCSVParser.parseTransactions();
-            transactionMap.forEach((id, transaction) -> System.out.println("Id: " + id + ", transaction: " + transaction));
-        } catch (DevSchoolException exception) {
+            List<Transaction> transactionsList = MyCSVParser.parseTransactions();
+            // transactionsList.forEach(System.out::println);
+            ObjectMapper objectMapper = new ObjectMapper();
+            System.out.println(objectMapper.writeValueAsString(transactionsList));
+        } catch (DevSchoolException | JsonProcessingException exception) {
             exception.printStackTrace();
         }
     }

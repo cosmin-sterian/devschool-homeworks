@@ -1,15 +1,14 @@
-package com.ing.devschool;
+package com.ing.devschool.utils;
 
+import com.ing.devschool.DevSchoolException;
+import com.ing.devschool.transactions.Transaction;
 import com.opencsv.CSVReader;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MyCSVParser {
     private static final int DATE = 0;
@@ -62,7 +61,7 @@ public class MyCSVParser {
 
     }
 
-    public static Map<Integer, Transaction> parseTransactions() throws DevSchoolException {
+    public static List<Transaction> parseTransactions() throws DevSchoolException {
 
         List<String[]> csvTransactionsList;
 
@@ -74,7 +73,7 @@ public class MyCSVParser {
             // We can't go further with a null list
         }
 
-        Map<Integer, Transaction> transactionsMap = new HashMap<>();
+        List<Transaction> transactionsList = new ArrayList<>();
         for (String[] line : csvTransactionsList) {
             String dateString = line[DATE];
             /*
@@ -82,24 +81,25 @@ public class MyCSVParser {
              * it's not needed in the output, unless
              * the "inner" transactions are sorted by time
              */
-            String timeString = line[TIME];
+            String timeString = line[DATE] + " " + line[TIME];
             Integer transactionId = Integer.parseInt(line[TRANSACTION]);
             String itemName = line[ITEM];
 
+            Transaction transaction = new Transaction(transactionId, dateString);
             // Check if transaction exists
-            if (transactionsMap.containsKey(transactionId)) {
+            if (transactionsList.contains(transaction)) {
                 // It exists, grab the object
-                Transaction transaction = transactionsMap.get(transactionId);
+                transaction = transactionsList.get(transactionsList.indexOf(transaction));
                 transaction.addTransaction(itemName, timeString);
             } else {
-                // Create a new object
-                Transaction transaction = new Transaction(transactionId, dateString);
+                // Insert a new object
                 transaction.addTransaction(itemName, timeString);
-                transactionsMap.put(transactionId, transaction);
+                transactionsList.add(transaction);
             }
+            transactionsList.sort(Transaction::compareTo);
         }
 
-        return transactionsMap;
+        return transactionsList;
 
     }
 

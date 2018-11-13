@@ -1,10 +1,12 @@
-package com.ing.devschool;
+package com.ing.devschool.transactions;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ing.devschool.transactions.serializers.TransactionItemsMapSerializer;
 
+import java.util.*;
+import java.util.function.BiConsumer;
+
+@JsonSerialize(using = TransactionItemsMapSerializer.class)
 public class TransactionItemsMap {
     /*
      * wrapper class over a hashmap
@@ -42,6 +44,23 @@ public class TransactionItemsMap {
         return transactionItemsMap.entrySet();
     }
 
+    public Collection<TransactionItem> values() {
+        /*
+         * I don't know if it's a good practice to cast a collection to a List,
+         * but I can't get to sort the items, it says that a Comparator doesn't
+         * match for a List type, but there were no List keywords around
+         */
+        Collection<TransactionItem> values = transactionItemsMap.values();
+        List<TransactionItem> valuesList;
+        if (values instanceof List)
+            valuesList = (List<TransactionItem>) values;
+        else
+            valuesList = new ArrayList<>(values);
+        valuesList.sort(TransactionItem::compareTo);
+
+        return valuesList;
+    }
+
     int size() {
         return transactionItemsMap.size();
     }
@@ -56,4 +75,9 @@ public class TransactionItemsMap {
 
         return result.toString();
     }
+
+    public void forEach(BiConsumer<String, TransactionItem> biConsumer) {
+        transactionItemsMap.forEach(biConsumer);
+    }
+
 }
