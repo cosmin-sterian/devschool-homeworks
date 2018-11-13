@@ -19,11 +19,15 @@ public class TransactionItemsMapSerializer extends StdSerializer<TransactionItem
     }
 
     @Override
-    public void serialize(TransactionItemsMap transactionItemsMap, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeStartObject();
-        for (TransactionItem transactionItem : transactionItemsMap.values()) {
-            jsonGenerator.writeNumberField(transactionItem.getName(), transactionItem.getCount());
+    public void serialize(TransactionItemsMap transactionItemsMap, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) {
+        try {
+            jsonGenerator.writeStartObject();
+            for (TransactionItem transactionItem : transactionItemsMap.values()) {
+                jsonGenerator.writeNumberField(transactionItem.getName(), transactionItem.getCount());
+            }
+            jsonGenerator.writeEndObject();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
-        jsonGenerator.writeEndObject();
     }
 }

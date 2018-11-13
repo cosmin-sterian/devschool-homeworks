@@ -18,9 +18,13 @@ public class TransactionItemSerializer extends StdSerializer<TransactionItem> {
     }
 
     @Override
-    public void serialize(TransactionItem transactionItem, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeStartObject();
-        jsonGenerator.writeNumberField(transactionItem.getName(), transactionItem.getCount());
-        jsonGenerator.writeEndObject();
+    public void serialize(TransactionItem transactionItem, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) {
+        try {
+            jsonGenerator.writeStartObject();
+            jsonGenerator.writeNumberField(transactionItem.getName(), transactionItem.getCount());
+            jsonGenerator.writeEndObject();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
 }
