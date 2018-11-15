@@ -1,0 +1,75 @@
+@font-face {
+    font-family: 'Kodchasan';
+    src: url('resources/fonts/Kodchasan-Regular.ttf');
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: gray;
+    background-image: url("resources/connectwork.png");
+    max-width: 1600px;
+}
+
+.flex-container {
+    display: flex; /* use flexbox for the entire layout of the page */
+    flex-wrap: wrap;
+}
+
+.flex-item-header {
+    flex: 1 0 100%;
+}
+
+.flex-item-aside {
+    order: 0;
+    max-width: 350px;
+}
+
+.flex-item-main {
+    order: 1;
+}
+
+nav ul {
+    padding: 0;
+    text-align: center;
+}
+
+nav li {
+    display: inline;
+}
+
+nav li a {
+    color: rgb(48, 175, 248);
+    background-color: #555;
+    margin: 0 5px;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px #aaa;
+}
+
+nav li a:hover {
+    background-color: #000;
+}
+
+nav li a:active {
+    /* background-color: transparent; */
+    box-shadow: none;
+}
+
+h1 {
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Kodchasan';
+}
+
+main,
+footer {
+    max-width: 800px;
+    margin: 100px auto;
+}
+
+footer {
+    text-align: center;
+    opacity: 0.7;
+}
