@@ -28,3 +28,8 @@ footer {
 footer {
     text-align: center;
 }
+
+.section-bg-change {
+    background-color: #555;
+    color: #fff;
+}
