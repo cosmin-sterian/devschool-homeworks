@@ -13,19 +13,30 @@ body {
 .flex-container {
     display: flex; /* use flexbox for the entire layout of the page */
     flex-wrap: wrap;
+    justify-content: center;
 }
 
-.flex-item-header {
+.flex-item {
+    margin: 15px;
+}
+
+header.flex-item {
     flex: 1 0 100%;
 }
 
-.flex-item-aside {
+aside.flex-item {
     order: 0;
     max-width: 350px;
 }
 
-.flex-item-main {
+main.flex-item {
     order: 1;
+    flex: 1 0 auto;
+}
+
+footer.flex-item {
+    order: 2;
+    flex: 1 0 auto;
 }
 
 nav ul {
@@ -63,7 +74,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Kodchasan';
 }
 
-main,
+/* main, // removed, in order to properly solve this homework's tasks*/
 footer {
     max-width: 800px;
     margin: 100px auto;
