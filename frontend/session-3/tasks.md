@@ -4,6 +4,6 @@
   
 // Suggestion: Intersection Observer API  
 [~] 
-    [x] add a button in the aside element that when clicked inserts a new article in the main element, at the top.
-    [~] Inside the newly created article there should be a button,
+    [x] add a button in the aside element that when clicked inserts a new article in the main element, at the top.  
+    [~] Inside the newly created article there should be a button,  
     [ ] which when clicked adds a new section above itself, the section has 400 random alphabet characters.  
