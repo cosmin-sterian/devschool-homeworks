@@ -42,6 +42,7 @@ footer.flex-item {
 nav ul {
     padding: 0;
     text-align: center;
+    margin: 20px;
 }
 
 nav li {
