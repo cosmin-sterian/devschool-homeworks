@@ -75,7 +75,7 @@ nav li a:active {
     position: absolute;
 } */
 
-nav.sticky {
+nav.sticky, header.sticky {
     position: sticky;
     top: 10px;
 }
