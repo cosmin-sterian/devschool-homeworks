@@ -19,6 +19,10 @@ h1 {
     text-align: center;
 }
 
+aside {
+    text-align: center;
+}
+
 main,
 footer {
     max-width: 800px;

@@ -4,7 +4,7 @@ const audioElement = document.getElementById("audio1");
 var isPlaying = false;
 
 (function(img_arg) {
-    img_arg.addEventListener('click', function(event) {
+    img_arg.addEventListener('click', function(_) {
         if (isPlaying) {
             audioElement.pause();
         } else {
@@ -32,7 +32,7 @@ function buildThreshholdList() {
 
 const intersectionThreshhold = 0.9;
 
-function handleIntersect(entries, observer) {
+function handleIntersect(entries, _) {
     entries.forEach(entry => {
         var section = entry.target;
         if (entry.intersectionRatio > intersectionThreshhold) {
@@ -54,3 +54,36 @@ const sections = document.querySelectorAll('section');
 sections.forEach(section => {
     observer.observe(section);
 });
+
+// Task 3
+const newForm = document.createElement('form');
+newForm.action = '';
+const btn = document.createElement('button');
+const txt = document.createTextNode('psst, hey kid')
+btn.appendChild(txt);
+newForm.appendChild(btn);
+const aside = document.querySelector('aside');
+aside.insertBefore(newForm, aside.firstChild);
+
+btn.addEventListener('click', _ => {
+    createArticle();
+    //TODO: create child button
+    aside.removeChild(newForm);
+});
+
+function createArticle() {
+    const mainElement = document.querySelector('main');
+    const newArticle = document.createElement('article');
+    newArticle.id = 'a0';
+    const newArticleHeader = document.createElement('h2');
+    newArticleHeader.textContent = 'This article can pack a section with 400 random characters!';
+    newArticle.appendChild(newArticleHeader);
+    console.log(mainElement.firstElementChild.nextElementSibling);
+    mainElement.insertBefore(newArticle, mainElement.firstElementChild.nextElementSibling);
+    /**
+     * I did the nextSibling stuff becuase I want to keep the h1 "title" above the new article
+     * I think it's more esthetic
+     */
+    newArticle.tabIndex = -1; // Hack required to make it focusable
+    newArticle.focus();
+}
