@@ -11,4 +11,5 @@ Tasks:
 [x] between all elements (header, aside, main, footer) there should be a distance (gutter) of 30px;
 // Setting a margin messes the main, it won't take all the available space
 // ^ fixed using 'flex: 1 0 auto' in the main.flex-item
-[ ] as you scroll the page, the nav should stick to the top of the page when you go past its position
+[?] as you scroll the page, the nav should stick to the top of the page when you go past its position
+// The left navbar(in the aside) is sticky, because it has space to scroll down, but the top navbar can't scroll past the main flexitem

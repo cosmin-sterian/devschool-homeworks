@@ -10,6 +10,7 @@ body {
     max-width: 1600px;
 }
 
+
 .flex-container {
     display: flex; /* use flexbox for the entire layout of the page */
     flex-wrap: wrap;
@@ -68,6 +69,15 @@ nav li a:hover {
 nav li a:active {
     /* background-color: transparent; */
     box-shadow: none;
+}
+
+/* .sticky-container {
+    position: absolute;
+} */
+
+nav.sticky {
+    position: sticky;
+    top: 10px;
 }
 
 h1 {
