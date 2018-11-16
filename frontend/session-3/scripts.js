@@ -66,17 +66,23 @@ const aside = document.querySelector('aside');
 aside.insertBefore(newForm, aside.firstChild);
 
 btn.addEventListener('click', _ => {
-    createArticle();
-    //TODO: create child button
     aside.removeChild(newForm);
+    const newArticle = createArticle();
+    const btnAndForm = createButtonInArticle(newArticle);
+    //TODO: add event listener on new button and create section
+    const anotherBtn = btnAndForm.button;
+    anotherBtn.addEventListener('click', _ => {
+        createSection(btnAndForm.form, newArticle);
+    });
 });
 
 function createArticle() {
     const mainElement = document.querySelector('main');
     const newArticle = document.createElement('article');
-    newArticle.id = 'a0';
     const newArticleHeader = document.createElement('h2');
     newArticleHeader.textContent = 'This article can pack a section with 400 random characters!';
+    newArticleHeader.id = 'a0';
+    newArticle.style.textAlign = 'center';
     newArticle.appendChild(newArticleHeader);
     console.log(mainElement.firstElementChild.nextElementSibling);
     mainElement.insertBefore(newArticle, mainElement.firstElementChild.nextElementSibling);
@@ -86,4 +92,32 @@ function createArticle() {
      */
     newArticle.tabIndex = -1; // Hack required to make it focusable
     newArticle.focus();
+    newArticle.removeAttribute('tabIndex'); // Clean up
+
+    return newArticle;
+}
+
+function createButtonInArticle(article) {
+    const newForm = document.createElement('form');
+    newForm.action = "";
+    const btn = document.createElement('button');
+    const txt = document.createTextNode('*slaps roof of button*');
+    btn.appendChild(txt);
+    newForm.appendChild(btn);
+    article.appendChild(newForm);
+
+    return {button: btn, form: newForm};
+}
+
+function createSection(form, article) {
+    form.parentElement.removeChild(form);
+    const newSection = document.createElement('section');
+    const newSectionHeader = document.createElement('h3');
+    newSectionHeader.textContent = 'Here are the 400 random characters';
+    newSectionHeader.id = 's0';
+    newSection.appendChild(newSectionHeader);
+    article.appendChild(newSection);
+    const newText = document.createTextNode('asdf');
+    //TODO: random chars
+    newSection.appendChild(newText);
 }
