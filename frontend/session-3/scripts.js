@@ -56,6 +56,7 @@ sections.forEach(section => {
 });
 
 // Task 3
+const strSize = 400;
 const newForm = document.createElement('form');
 newForm.action = '';
 const btn = document.createElement('button');
@@ -117,7 +118,32 @@ function createSection(form, article) {
     newSectionHeader.id = 's0';
     newSection.appendChild(newSectionHeader);
     article.appendChild(newSection);
-    const newText = document.createTextNode('asdf');
-    //TODO: random chars
+    const randomString = createRandomString();
+    const newText = document.createTextNode(randomString);
     newSection.appendChild(newText);
+}
+
+function createAlphabetList() {
+    var alphabet = [];
+    const capitalAIndex = 'A'.charCodeAt(0);
+    const capitalZIndex = 'Z'.charCodeAt(0);
+
+    for (i = capitalAIndex; i <= capitalZIndex; i++) {
+        alphabet.push(String.fromCharCode(i));
+        alphabet.push(String.fromCharCode(i + 32));
+    }
+
+    return alphabet;
+}
+
+function createRandomString() {
+    var randomString = "";
+    const alphabet = createAlphabetList();
+
+    for (i = 0; i < strSize; i++) {
+        var randomNumber = Math.floor(Math.random() * alphabet.length);
+        randomString += alphabet[randomNumber];
+    }
+
+    return randomString;
 }
