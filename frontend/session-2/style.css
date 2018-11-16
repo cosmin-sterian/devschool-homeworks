@@ -5,9 +5,14 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: gray;
+    color: #aaa;
     background-image: url("resources/connectwork.png");
     max-width: 1600px;
+    text-align: center;
+}
+
+main {
+    word-wrap: break-word;
 }
 
 
@@ -15,10 +20,19 @@ body {
     display: flex; /* use flexbox for the entire layout of the page */
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 1600px;
+}
+
+.one-line-flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    min-width: 0;
+    width: 100%;
 }
 
 .flex-item {
     margin: 15px;
+    min-width: 0;
 }
 
 header.flex-item {
@@ -27,12 +41,14 @@ header.flex-item {
 
 aside.flex-item {
     order: 0;
+    min-width: fit-content;
     max-width: 350px;
+    flex: 1 0 auto;
 }
 
 main.flex-item {
     order: 1;
-    flex: 1 0 auto;
+    flex: 1 1 auto;
 }
 
 footer.flex-item {
@@ -75,7 +91,7 @@ nav li a:active {
     position: absolute;
 } */
 
-nav.sticky, header.sticky {
+.sticky {
     position: sticky;
     top: 10px;
 }
@@ -92,9 +108,10 @@ h1, h2, h3, h4, h5, h6 {
 footer {
     max-width: 800px;
     margin: 100px auto;
-}
-
-footer {
     text-align: center;
     opacity: 0.7;
+}
+
+.section-bg-change {
+    background-color: rgba(85, 1, 1, 0.6);
 }
