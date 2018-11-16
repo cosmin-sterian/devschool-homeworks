@@ -30,7 +30,7 @@ function buildThreshholdList() {
     return thresholds;
 }
 
-const intersectionThreshhold = 0.9;
+const intersectionThreshhold = 0.6;
 
 function handleIntersect(entries, _) {
     entries.forEach(entry => {
@@ -64,13 +64,13 @@ const txt = document.createTextNode('psst, hey kid')
 btn.appendChild(txt);
 newForm.appendChild(btn);
 const aside = document.querySelector('aside');
-aside.insertBefore(newForm, aside.firstChild);
+const asideDiv = aside.firstElementChild;
+asideDiv.insertBefore(newForm, asideDiv.firstChild);
 
 btn.addEventListener('click', _ => {
-    aside.removeChild(newForm);
+    asideDiv.removeChild(newForm);
     const newArticle = createArticle();
     const btnAndForm = createButtonInArticle(newArticle);
-    //TODO: add event listener on new button and create section
     const anotherBtn = btnAndForm.button;
     anotherBtn.addEventListener('click', _ => {
         createSection(btnAndForm.form, newArticle);
@@ -84,6 +84,7 @@ function createArticle() {
     newArticleHeader.textContent = 'This article can pack a section with 400 random characters!';
     newArticleHeader.id = 'a0';
     newArticle.style.textAlign = 'center';
+    newArticle.style.wordWrap = 'break-word';
     newArticle.appendChild(newArticleHeader);
     console.log(mainElement.firstElementChild.nextElementSibling);
     mainElement.insertBefore(newArticle, mainElement.firstElementChild.nextElementSibling);
@@ -91,9 +92,7 @@ function createArticle() {
      * I did the nextSibling stuff becuase I want to keep the h1 "title" above the new article
      * I think it's more esthetic
      */
-    newArticle.tabIndex = -1; // Hack required to make it focusable
-    newArticle.focus();
-    newArticle.removeAttribute('tabIndex'); // Clean up
+    window.scrollTo(0, 0); // We want the user to be ready for the surprise element, hue hue
 
     return newArticle;
 }
@@ -118,9 +117,19 @@ function createSection(form, article) {
     newSectionHeader.id = 's0';
     newSection.appendChild(newSectionHeader);
     article.appendChild(newSection);
+    observer.observe(newSection);
+
+    // Create text container
+    const newDiv = document.createElement('div');
+    newDiv.style.maxWidth = '100%';
+    newDiv.style.margin = 'auto';
+    newSection.appendChild(newDiv);
+
     const randomString = createRandomString();
     const newText = document.createTextNode(randomString);
-    newSection.appendChild(newText);
+    newDiv.appendChild(newText);
+    
+    document.querySelector('#img1').src = 'resources/slap.png';
 }
 
 function createAlphabetList() {

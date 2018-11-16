@@ -1,0 +1,40 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+    text-align: center;
+}
+
+nav ul {
+    padding: 0;
+    text-align: center;
+}
+
+nav li {
+    display: inline;
+}
+
+h1 {
+    text-align: center;
+}
+
+aside {
+    text-align: center;
+}
+
+main,
+footer {
+    max-width: 800px;
+    margin: 100px auto;
+    word-wrap: break-word;
+}
+
+footer {
+    text-align: center;
+}
+
+.section-bg-change {
+    background-color: #555;
+    color: #fff;
+}
