@@ -1,0 +1,13 @@
+Homework Java 8:
+
+Implement one of the following assignments:
+    1. implement missing methods from project (21)
+        - lambda expressions need to have a maximum of 1 line (use method reference otherwise)
+
+    2. add the following functionality to previous session 3 assignment:
+        - add json input format support (same filed names as csv column names)
+            - you support both json and csv based on runtime parameter
+        - migrate logic of converting transaction items into a transaction summary to java 8
+        - use parallel streams when converting transaction items
+        - try to use java 8 as much as possible throughout the project
+            - lambda expressions need to have a maximum of 1 line
