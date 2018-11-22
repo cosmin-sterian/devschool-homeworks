@@ -2,6 +2,7 @@ package com.ing.devschool;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -34,6 +35,11 @@ public class Java8Assignment {
 		 * String result = numbers.stream().limit(10).map(Object::toString).reduce("", (acc, e) -> acc+e+" ");
 		 * System.out.println(result);
 		 */
+		/*
+		 * Cristi's fix to reduce numbers with a String accumulator
+		 * StringBuilder result = numbers.stream().limit(10).reduce(new StringBuilder(), (acc, e) -> acc.append(e).append(" "), (acc1, acc2) -> acc1.append(acc2));
+		 * System.out.println("aaaaaaaaaaaaaaaa " + result);
+		 */
 		printSeparator();
 
 		// 2: using "numbers" as input print first ten odd numbers
@@ -59,9 +65,27 @@ public class Java8Assignment {
 		// 7. using "numbers" as input print the sum of the even numbers
 		System.out.println(numbers.stream().filter(n -> n % 2 == 0).reduce(0, (acc, e) -> acc + e));
 		// 8. using "numbers" as input print the sum of the even numbers which contain '7'
-		System.out.println(numbers.stream().filter(n -> n.toString().contains("7")).filter(n -> n %2 == 0).reduce(0, (acc, e) -> acc + e));
+		System.out.println(numbers.stream().filter(new Predicate<Integer>() {
+			@Override
+			public boolean test(Integer integer) {
+				return (integer != 0) && ((integer % 10 == 7) || test(integer / 10));
+				// P.S.: I hope you like this, Cristi, because it blew my mind when I had this idea :D
+			}
+		}).filter(n -> n % 2 == 0).reduce(0, (acc, e) -> acc + e));
+		/*
+		 * A shorter but hack-ish option:
+		 * System.out.println(numbers.stream().filter(n -> n.toString().contains("7")).filter(n -> n % 2 == 0).reduce(0, (acc, e) -> acc + e));
+		 */
 		// 9. implement 5, 6, 7, 8 using one method
-
+		printReductionOfFilteredTwice(numbers, e -> true, e -> true, 0, (acc, e) -> acc + e);
+		printReductionOfFilteredTwice(numbers, n -> n % 2 != 0, e -> true, 0, (acc, e) -> acc + e);
+		printReductionOfFilteredTwice(numbers, n -> n % 2 == 0, e -> true, 0, (acc, e) -> acc + e);
+		printReductionOfFilteredTwice(numbers, new Predicate<Integer>() {
+			@Override
+			public boolean test(Integer integer) {
+				return (integer != 0) && ((integer % 10 == 7) || test(integer / 10));
+			}
+		}, n -> n % 2 == 0, 0, (acc, e) -> acc + e);
 		/*
 		 * Mixed map/filter/reduce
 		 */
@@ -90,6 +114,15 @@ public class Java8Assignment {
 		 * Optional<T>
 		 */
 		// 21. using "numbers" as input print the first odd number that can be divided by 121, if it does not exist print -1
+	}
+
+	private static <T> void printReductionOfFilteredTwice(
+			List<T> numbers, Predicate<T> predicate1, Predicate<T> predicate2,
+			T accInitialValue, BinaryOperator<T> binaryOperator
+	) {
+		// Is it really worth of being named "sum" if it's using generic types??
+		System.out.println(numbers.stream().filter(predicate1).filter(predicate2).reduce(accInitialValue, binaryOperator));
+		printSeparator();
 	}
 
 	private static <T> void printFirstFiltered(List<T> numbers, int count, Predicate<T> predicate) {
