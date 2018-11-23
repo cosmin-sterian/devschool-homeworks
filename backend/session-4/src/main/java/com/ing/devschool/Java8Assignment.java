@@ -159,12 +159,16 @@ public class Java8Assignment {
 						.map(n -> n * 7)
 						.map(n -> n % 20 == 3 ? n / 20 : n)
 						.reduce(0, (acc, e) -> acc + (e / 10))
-		); // λ ftw
+		); // functional & λ ftw
 		/*
 		 * Optional<T>
 		 */
 		// 21. using "numbers" as input print the first odd number that can be divided by 121, if it does not exist print -1
-		
+		// numbers = numbers.stream().filter(n -> n % 121 != 0).collect(Collectors.toList()); // Uncomment this line to test orElse case
+		System.out.println(
+				"Optional: " +
+						numbers.stream().filter(n -> n % 2 != 0).filter(n -> n % 121 == 0).findFirst().orElse(-1)
+		);
 	}
 
 	private static <T, R> void printFilterMapReduce(
