@@ -151,11 +151,20 @@ public class Java8Assignment {
 		 */
 		// 20. convert the following code to java 8
 		nonJava8Method(numbers);
-
+		System.out.println(
+				numbers.stream()
+						.filter(n -> n % 2 == 0)
+						.limit(6)
+						.map(n -> n + 5)
+						.map(n -> n * 7)
+						.map(n -> n % 20 == 3 ? n / 20 : n)
+						.reduce(0, (acc, e) -> acc + (e / 10))
+		); // λ ftw
 		/*
 		 * Optional<T>
 		 */
 		// 21. using "numbers" as input print the first odd number that can be divided by 121, if it does not exist print -1
+		
 	}
 
 	private static <T, R> void printFilterMapReduce(
