@@ -1,6 +1,11 @@
 package PizzaStore.Employee;
 
+import PizzaStore.Menu.Menu;
+import PizzaStore.Menu.Pizza.Ingredient;
+import PizzaStore.Menu.Pizza.Pizza;
 import PizzaStore.PizzaStore;
+
+import java.util.List;
 
 public class CustomerService implements Employable {
 
@@ -26,13 +31,13 @@ public class CustomerService implements Employable {
 	}
 
 	@Override
-	public void setEmployeeType(EmployeeType employeeType) {
-		this.employeeType = employeeType;
+	public EmployeeType getEmployeeType() {
+		return employeeType;
 	}
 
 	@Override
-	public EmployeeType getEmployeeType() {
-		return employeeType;
+	public Pizza handleRequest(Menu.PizzaType pizzaType, List<Ingredient> extras) {
+		return null; // TODO
 	}
 
 	public void update() {
