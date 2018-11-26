@@ -2,6 +2,7 @@ package PizzaStore.Menu.Pizza;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.BiFunction;
 
 public class Pizza {
 	// Target of Builder Pattern
@@ -37,5 +38,9 @@ public class Pizza {
 
 	private boolean checkFullExtras() {
 		return extras.size() == MAX_EXTRAS;
+	}
+
+	public Pizza addWithFunction(BiFunction<Pizza, Ingredient, Pizza> ingredientPizzaBiFunction, Ingredient ingredient) {
+		return ingredientPizzaBiFunction.apply(this, ingredient);
 	}
 }
