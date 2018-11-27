@@ -1,46 +1,11 @@
 package PizzaStore.Menu.Pizza;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.function.BiFunction;
-
-public class Pizza {
+public class Pizza extends PizzaTemplate {
 	// Target of Builder Pattern
-	private static final int MAX_EXTRAS = 3;
 
-	private List<Ingredient> ingredients;
-	private List<Ingredient> extras;
-
-	public Pizza() {
-		ingredients = new LinkedList<>();
-		extras = new LinkedList<>();
+	public Pizza(PizzaRecipe pizzaRecipe) {
+		super(pizzaRecipe);
+		templateType = TemplateType.PIZZA;
 	}
 
-	public Pizza addIngredient(Ingredient ingredient) {
-		ingredients.add(ingredient);
-		return this;
-	}
-
-	public List<Ingredient> getIngredients() {
-		return ingredients;
-	}
-	public Pizza addExtra(Ingredient extra) {
-		if (checkFullExtras()) {
-			System.out.println("Sorry, no more extras on this pizza!");
-			return this;
-		}
-		extras.add(extra);
-		return this;
-	}
-	public List<Ingredient> getExtras() {
-		return extras;
-	}
-
-	private boolean checkFullExtras() {
-		return extras.size() == MAX_EXTRAS;
-	}
-
-	public Pizza addWithFunction(BiFunction<Pizza, Ingredient, Pizza> ingredientPizzaBiFunction, Ingredient ingredient) {
-		return ingredientPizzaBiFunction.apply(this, ingredient);
-	}
 }
