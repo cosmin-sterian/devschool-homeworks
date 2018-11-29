@@ -33,9 +33,9 @@ function fetchData() {
             // console.log('success');
             const response = JSON.parse(xhr.responseText);
             if (forecastBoolean) {
-                forecastContainer.textContent = response.consolidated_weather[0].weather_state_name;
+                forecastContainer.textContent = "Weather: " + response.consolidated_weather[0].weather_state_name + " for " + response.title;
             } else {
-                forecastContainer.textContent = response[0].woeid;
+                forecastContainer.textContent = "City ID: " + response[0].woeid;
             }
             
             // console.log(forecastContainer.textContent);
