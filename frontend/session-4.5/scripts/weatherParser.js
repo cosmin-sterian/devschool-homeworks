@@ -21,8 +21,9 @@ function requestDataFromWeatherAPI(event, forecast, inputData) {
 function fetchData(xhr) {
     console.log(xhr);
     console.log(xhr.status);
+    const forecastContainer = document.querySelector('#forecastContainer');
+    forecastContainer.style.display = "inline-block";
     if (xhr.readyState === XMLHttpRequest.DONE) {
-        const forecastContainer = document.querySelector('#forecastContainer');
         forecastContainer.textContent = "";
         console.log(JSON.parse(xhr.responseText));
         if (xhr.status === 200) {
@@ -32,6 +33,8 @@ function fetchData(xhr) {
         } else {
             forecastContainer.textContent = 'Content not found';
         }
+    } else {
+        forecastContainer.textContent = 'xhr readyState other than DONE';
     }
 }
 
