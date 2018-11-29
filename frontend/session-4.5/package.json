@@ -1,0 +1,11 @@
+{
+  "name": "session-4.5",
+  "version": "1.0.0",
+  "description": "Designed to use the MetaWeather API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "stery",
+  "license": "ISC"
+}
