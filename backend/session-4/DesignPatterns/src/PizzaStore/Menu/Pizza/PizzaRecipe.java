@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class PizzaRecipe {
 	// Builder class for PizzaTemplate
-	private static final int MAX_EXTRAS = 3;
+	public static final int MAX_EXTRAS = 3;
 	public static final HashMap<Menu.PizzaType, Set<Ingredient>> recipes = new HashMap<Menu.PizzaType, Set<Ingredient>>()
 	{{
 		put(Menu.PizzaType.CHICKEN_BARBEQUE_PIZZA,

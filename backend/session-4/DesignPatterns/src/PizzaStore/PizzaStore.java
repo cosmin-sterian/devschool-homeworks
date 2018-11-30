@@ -7,6 +7,7 @@ import PizzaStore.Menu.Pizza.PizzaTemplate;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class PizzaStore {
 	private static volatile PizzaStore instance; // Singleton
@@ -67,6 +68,19 @@ public class PizzaStore {
 		}
 		employees_count++;
 		return employable;
+	}
+
+	public Employable assignCustomerToCustomerService(Customer customer) {
+		Optional<Employable> employableOptional = customerServiceEmployees
+				.stream()
+				.filter(Employable::isAvailable)
+				.findFirst();
+		if (!employableOptional.isPresent()) {
+			return null;
+		}
+		Employable availableCustomerService = employableOptional.get();
+		availableCustomerService.setAssignedCustomer(customer);
+		return availableCustomerService;
 	}
 
 	public void notifyCustomerService() {
