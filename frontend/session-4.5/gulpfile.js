@@ -19,14 +19,19 @@ gulp.task('styles', function() {
     return gulp.src('./styles/styles.css')
         .pipe(autoprefixer({ browsers: BROWSERS }))
         .pipe(csso())
-        .pipe(gulp.dest('./build'));
+        .pipe(gulp.dest('./build/styles'));
 });
 
 gulp.task('scripts', function() {
     return gulp.src('./scripts/*.js')
         .pipe(uglify())
         // .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
-        .pipe(gulp.dest('./build'));
+        .pipe(gulp.dest('./build/scripts'));
+});
+
+gulp.task('resources', function() {
+    return gulp.src('./resources/**/*')
+        .pipe(gulp.dest('./build/resources'));
 });
 
 gulp.task('html', function() {
@@ -46,6 +51,7 @@ gulp.task('default', ['clean'], function() { // ruleaza 'clean' inainte de funct
     runSequence(
         'styles',
         'scripts',
+        'resources',
         'html'
     );
 });
