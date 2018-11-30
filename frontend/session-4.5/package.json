@@ -1,0 +1,27 @@
+{
+  "name": "session-4.5",
+  "version": "1.0.0",
+  "description": "Designed to use the MetaWeather API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp"
+  },
+  "author": "stery",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-csso": "^3.0.1",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.1",
+    "gulp-uglify-es": "^1.0.4",
+    "mocha": "^5.2.0",
+    "run-sequence": "^2.2.1",
+    "sinon": "^7.1.1"
+  },
+  "dependencies": {}
+}

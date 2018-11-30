@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sessions 4-5 assignment</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <div class="contentContainer">
+        <div class="flexFormContainer">
+            <h2>Get your forecast!</h2>
+            <form action="">
+                <div class="formGroup">
+                    <label for="cityName">City name:</label>
+                    <input type="text" name="cityName" id="cityName" placeholder="Bucharest">
+                </div>
+                <div class="formGroup">
+                    <label for="cityID">City ID:</label>
+                    <input type="number" name="cityID" id="cityID">
+                </div>
+                <div class="formGroup">
+                    <button id="formButton">Get Location</button>
+                </div>
+            </form>
+        </div>
+        <div id="forecastContainer">
+            <!-- TODO -->
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea pariatur quae voluptatem ducimus reprehenderit, placeat est assumenda repellendus nemo accusantium ut obcaecati molestias cupiditate in sunt voluptas quaerat fuga et!
+            Itaque impedit obcaecati minima soluta velit? Eaque officiis praesentium quae quos ducimus, consequatur distinctio officia expedita odit, dolores doloremque blanditiis eos aspernatur, voluptatem voluptates. Cum nulla quo aliquid sed quis!
+        </div>
+        <div id="mocha"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/5.2.0/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sinon@3/pkg/sinon.js"></script>
+    <script src="../scripts/weatherParser.js"></script>
+    <script src="../scripts/scripts.js"></script>
+    <script>
+        mocha.ui('bdd'); 
+        mocha.reporter('html');
+        var expect = chai.expect;
+    </script>
+    <script src="./test.spec.js"></script>
+    <script>
+        mocha.run();
+    </script>
+</body>
+</html>
