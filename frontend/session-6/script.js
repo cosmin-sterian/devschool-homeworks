@@ -13,6 +13,11 @@ class Cipher {
             console.error("Please use a string message");
             return null;
         }
+        const encodedList = []
+        message.split('').forEach(chr => {
+            encodedList.push(chr.charCodeAt() * this.initialKey);
+        });
 
+        encodedList.join // TODO, low battery
     }
 }
