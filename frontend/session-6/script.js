@@ -18,6 +18,35 @@ class Cipher {
             encodedList.push(chr.charCodeAt() * this.initialKey);
         });
 
-        encodedList.join // TODO, low battery
+        const encoded = encodedList.join("-");
+        this.cipherLog
+            .push(`${new Date().toLocaleString()}: "${message}" encoded as "${encoded}"`); // LOG the operation
+        return encoded;
+    }
+
+    decode(message) {
+        if (! typeof message === 'string') { // Sanity check
+            console.error("Please use a string message");
+            return null;
+        }
+        let decoded = "";
+        message.split("-").forEach(encodedChr => {
+            decoded += String.fromCharCode(encodedChr / this.initialKey);
+        });
+        
+        this.cipherLog
+            .push(`${new Date().toLocaleString()}: "${message}" decoded as "${decoded}"`);
+        return decoded;
+    }
+
+    readLog() {
+        return this.cipherLog.join("\n");
     }
 }
+
+//TODO: Move test to a test script
+const cipher = new Cipher(20);
+const msg = cipher.encode("DevSchool");
+console.log(msg);
+console.log(cipher.decode(msg));
+console.log(cipher.readLog());
