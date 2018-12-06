@@ -6,6 +6,7 @@ class Cipher {
         }
         this.initialKey = initialKey;
         this.cipherLog = [] // List of strings representing the operations logs
+        this.store = new Map();
     }
 
     encode(message) {
@@ -19,6 +20,7 @@ class Cipher {
         });
 
         const encoded = encodedList.join("-");
+        this.store.set(encoded, message);
         this.cipherLog
             .push(`${new Date().toLocaleString()}: "${message}" encoded as "${encoded}"`); // LOG the operation
         return encoded;
@@ -29,11 +31,16 @@ class Cipher {
             console.error("Please use a string message");
             return null;
         }
+
         let decoded = "";
-        message.split("-").forEach(encodedChr => {
-            decoded += String.fromCharCode(encodedChr / this.initialKey);
-        });
-        
+        if (this.store.has(message)) { // Check if message(encoded) was cached before
+            decoded = this.store.get(message);
+        } else {
+            message.split("-").forEach(encodedChr => {
+                decoded += String.fromCharCode(encodedChr / this.initialKey);
+            });
+        }
+
         this.cipherLog
             .push(`${new Date().toLocaleString()}: "${message}" decoded as "${decoded}"`);
         return decoded;
