@@ -1,10 +1,6 @@
 import 'babel-polyfill'
 import Cipher from '../scripts/script.js'
 const { expect } = require("chai");
-// const chai = require("chai");
-// const chaiAsPromised = require("chai-as-promised");
-// chai.use(chaiAsPromised);
-// const expect = chai.expect;
 
 describe("Cipher without specified key", function() {
     it("should have the default 123 key", function() {
@@ -41,5 +37,28 @@ describe("Cipher decode", function() {
 
     it("should not leave the log list empty", function() {
         expect(cipher.readLog()).to.not.be.empty;
+    });
+});
+
+describe("Cipher cache", function () {
+    const cipher = new Cipher(20);
+    it("should cache the message", async function() {
+        const message = "DevSchool";
+        const expected = "1360-2020-2360-1660-1980-2080-2220-2220-2160"
+        await cipher.encode(message);
+        expect(cipher.store.get(expected)).to.be.equal(message);
+    });
+
+    it("should decode the message in less than 0.5s", async function() {
+        const expected = "DevSchool";
+        const message = "1360-2020-2360-1660-1980-2080-2220-2220-2160"
+        const startTime = new Date().getTime();
+        expect(await cipher.decode(message)).to.be.equal(expected);
+        const endTime = new Date().getTime();
+        expect(endTime - startTime).to.be.lessThan(500);
+    });
+
+    it("should have 2 logs right now", function () {
+        expect(cipher.cipherLog.length).to.be.equal(2);
     });
 });
