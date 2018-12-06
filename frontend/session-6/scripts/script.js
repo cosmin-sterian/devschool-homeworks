@@ -1,6 +1,6 @@
 import timeout from './timeout.js'
 
-class Cipher {
+export default class Cipher {
     constructor(initialKey = 123) {
         if (initialKey == null || isNaN(initialKey)) { // Sanity check
             console.error(`Cipher initialKey = '${initialKey}' is not a Number!`);
@@ -12,7 +12,7 @@ class Cipher {
     }
 
     async encode(message) {
-        if (! typeof message === 'string') { // Sanity check
+        if (!(typeof message === 'string')) { // Sanity check
             console.error("Please use a string message");
             return null;
         }
@@ -30,7 +30,7 @@ class Cipher {
     }
 
     async decode(message) {
-        if (! typeof message === 'string') { // Sanity check
+        if (!(typeof message === 'string')) { // Sanity check
             console.error("Please use a string message");
             return null;
         }
@@ -42,9 +42,9 @@ class Cipher {
             message.split("-").forEach(encodedChr => {
                 decoded += String.fromCharCode(encodedChr / this.initialKey);
             });
+            await timeout(message.length * 100);
         }
 
-        await timeout(message.length * 100);
         this.cipherLog
             .push(`${new Date().toLocaleString()}: "${message}" decoded as "${decoded}"`);
         return decoded;
@@ -56,10 +56,11 @@ class Cipher {
 }
 
 //TODO: Move test to a test script
-(async () => {
-    const cipher = new Cipher(20);
-    const msg = await cipher.encode("DevSchool");
-    console.log(msg);
-    console.log(await cipher.decode(msg));
-    console.log(cipher.readLog());
-})();
+// (async () => {
+//     const cipher = new Cipher(20);
+//     const msg = await cipher.encode("DevSchool");
+//     console.log(msg);
+//     console.log(await cipher.decode(msg));
+//     console.log(cipher.readLog());
+//     console.log(await cipher.encode(123));
+// })();
