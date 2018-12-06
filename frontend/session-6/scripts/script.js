@@ -1,66 +1,46 @@
-import timeout from './timeout.js'
+import Cipher from './cipher.js'
 
-export default class Cipher {
-    constructor(initialKey = 123) {
-        if (initialKey == null || isNaN(initialKey)) { // Sanity check
-            console.error(`Cipher initialKey = '${initialKey}' is not a Number!`);
-            return null;
-        }
-        this.initialKey = initialKey;
-        this.cipherLog = [] // List of strings representing the operations logs
-        this.store = new Map();
-    }
+const cipherKey = document.querySelector("#cipherKey");
+const decoded = document.querySelector("#decoded");
+const encoded = document.querySelector("#encoded");
+const logContaier = document.querySelector("#logContainer");
+const encodeButton = document.querySelector("#encodeButton");
+const decodeButton = document.querySelector("#decodeButton");
 
-    async encode(message) {
-        if (!(typeof message === 'string')) { // Sanity check
-            console.error("Please use a string message");
-            return null;
-        }
-        const encodedList = []
-        message.split('').forEach(chr => {
-            encodedList.push(chr.charCodeAt() * this.initialKey);
-        });
+console.log(encoded);
 
-        const encoded = encodedList.join("-");
-        this.store.set(encoded, message);
-        await timeout(message.length * 100);
-        this.cipherLog
-            .push(`${new Date().toLocaleString()}: "${message}" encoded as "${encoded}"`); // LOG the operation
-        return encoded;
-    }
+let cipher;
+let lastKey;
 
-    async decode(message) {
-        if (!(typeof message === 'string')) { // Sanity check
-            console.error("Please use a string message");
-            return null;
-        }
+console.log(`cipher:${cipher}, cipherKey:${cipherKey.value}, lastKey:${lastKey}`);
+console.log(cipherKey.value=="");
 
-        let decoded = "";
-        if (this.store.has(message)) { // Check if message(encoded) was cached before
-            decoded = this.store.get(message);
+encodeButton.addEventListener("click", event => buttonListener(event, true));
+decodeButton.addEventListener("click", event => buttonListener(event, false));
+
+async function buttonListener(event, encode) {
+
+    event.preventDefault();
+    console.log(cipherKey.value, lastKey);
+    console.log(cipherKey);
+
+    if (cipher == undefined) {
+        if (cipherKey.value == "") {
+            cipher = new Cipher();
         } else {
-            message.split("-").forEach(encodedChr => {
-                decoded += String.fromCharCode(encodedChr / this.initialKey);
-            });
-            await timeout(message.length * 100);
+            cipher = new Cipher(lastKey);
         }
-
-        this.cipherLog
-            .push(`${new Date().toLocaleString()}: "${message}" decoded as "${decoded}"`);
-        return decoded;
+    } else if (cipherKey.value != lastKey) {
+        lastKey = cipherKey.value;
+        cipher = new Cipher(lastKey);
     }
 
-    readLog() {
-        return this.cipherLog.join("\n");
+    if (encode) {
+        encoded.value = await cipher.encode(decoded.value || "DevSchool");
+    } else {
+        decoded.value = await cipher.decode(encoded.value || "1360-2020-2360-1660-1980-2080-2220-2220-2160");
     }
+
+    logContaier.textContent = cipher.readLog();
+
 }
-
-//TODO: Move test to a test script
-// (async () => {
-//     const cipher = new Cipher(20);
-//     const msg = await cipher.encode("DevSchool");
-//     console.log(msg);
-//     console.log(await cipher.decode(msg));
-//     console.log(cipher.readLog());
-//     console.log(await cipher.encode(123));
-// })();

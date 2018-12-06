@@ -4,11 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/styles.css">
     <title>ING {DevSchool} - Cipher</title>
 </head>
 <body>
-    
-    <!-- <script type="module" src="scripts/timeout.js"></script> -->
+    <div class="contentContainer">
+        <h2>Come get your Cipher!</h2>
+        <div class="flexContainer">
+            <form action="">
+                <div class="flexItem">
+                    <label for="cipherKey">Cipher key:</label>
+                    <input type="number" name="cipherKey" id="cipherKey" placeholder="123">
+                </div>
+                <div class="flexItem">
+                    <label for="decoded">Decoded message:</label>
+                    <input type="text" name="decoded" id="decoded" placeholder="DevSchool">
+                </div>
+                <div class="flexItem">
+                    <label for="encoded">Encoded message:</label>
+                    <input type="text" name="encoded" id="encoded" placeholder="1360-2020-2360-1660-1980-2080-2220-2220-2160">
+                </div>
+                <div class="flexItem">
+                    <button id="encodeButton">Encode</button>
+                    <button id="decodeButton">Decode</button>
+                </div>
+            </form>
+        </div>
+        <div id="logContainer">
+            
+        </div>
+    </div>
+
     <script type="module" src="scripts/script.js"></script>
 </body>
 </html>

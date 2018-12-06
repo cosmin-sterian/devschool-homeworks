@@ -13,11 +13,3 @@
 export default function timeout(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
-
-/*
-async function test() {
-    await timeout(2000);
-}
-
-test();
-*/
