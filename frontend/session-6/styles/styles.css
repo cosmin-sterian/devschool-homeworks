@@ -24,6 +24,7 @@ body {
     max-width: 75%;
     display: inline-block;
     word-wrap: break-word;
+    white-space: pre-line;
     margin: 20px;
     padding: 10px;
 }

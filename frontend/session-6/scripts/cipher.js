@@ -51,6 +51,6 @@ export default class Cipher {
     }
 
     readLog() {
-        return this.cipherLog.join("\n");
+        return this.cipherLog.join("\r\n");
     }
 }
