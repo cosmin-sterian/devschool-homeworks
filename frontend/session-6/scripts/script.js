@@ -1,3 +1,5 @@
+import timeout from './timeout.js'
+
 class Cipher {
     constructor(initialKey = 123) {
         if (initialKey == null || isNaN(initialKey)) { // Sanity check
@@ -9,7 +11,7 @@ class Cipher {
         this.store = new Map();
     }
 
-    encode(message) {
+    async encode(message) {
         if (! typeof message === 'string') { // Sanity check
             console.error("Please use a string message");
             return null;
@@ -21,12 +23,13 @@ class Cipher {
 
         const encoded = encodedList.join("-");
         this.store.set(encoded, message);
+        await timeout(message.length * 100);
         this.cipherLog
             .push(`${new Date().toLocaleString()}: "${message}" encoded as "${encoded}"`); // LOG the operation
         return encoded;
     }
 
-    decode(message) {
+    async decode(message) {
         if (! typeof message === 'string') { // Sanity check
             console.error("Please use a string message");
             return null;
@@ -41,6 +44,7 @@ class Cipher {
             });
         }
 
+        await timeout(message.length * 100);
         this.cipherLog
             .push(`${new Date().toLocaleString()}: "${message}" decoded as "${decoded}"`);
         return decoded;
@@ -52,8 +56,10 @@ class Cipher {
 }
 
 //TODO: Move test to a test script
-const cipher = new Cipher(20);
-const msg = cipher.encode("DevSchool");
-console.log(msg);
-console.log(cipher.decode(msg));
-console.log(cipher.readLog());
+(async () => {
+    const cipher = new Cipher(20);
+    const msg = await cipher.encode("DevSchool");
+    console.log(msg);
+    console.log(await cipher.decode(msg));
+    console.log(cipher.readLog());
+})();
